@@ -51,7 +51,7 @@ input:focus{
 }
 main{
     width:375px;
-    height:100vh; /*CORRIGIR LIMITE VERTICAL DA PÁGINA*/    
+    /*CORRIGIR LIMITE VERTICAL DA PÁGINA*/    
     margin: 106px 0 80px;
 }
 
@@ -77,4 +77,11 @@ main{
 }
 .status{
     background-color: #DCDCDC;
+}
+
+@media only screen and (hover: none) and (pointer: coarse), (max-width:375px) { 
+    body,header,footer,main{
+        width:100%;
+        min-width:375px;
+    }
 }
