@@ -51,7 +51,7 @@ input:focus{
 }
 
 /*Retira todos estilos do botão*/  
-.textbox  {
+.nostyle  {
 	background: none;
 	color: inherit;
 	border: none;

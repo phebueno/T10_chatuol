@@ -65,13 +65,13 @@ function atualizarChat(msgs){
     elemento.innerHTML = "";
     //Encontra todas as mensagens:
     msgs.forEach(msg => {
-        if (msg.type ==="status") 
+        if (msg.type === "status") 
             elemento.innerHTML += `<div data-test="message" class="mbox status">
             <span class="horamsg">${msg.time}</span>
             <span class="pessoa remetente">${msg.from}</span>
             <span class="mensagem">${msg.text}</span>
         </div>`
-        else if (msg.type ==="message") {
+        else if (msg.type === "message") {
             elemento.innerHTML += `<div data-test="message" class="mbox">
             <span class="horamsg">${msg.time}</span>
             <span class="pessoa remetente">${msg.from}</span>
@@ -79,9 +79,8 @@ function atualizarChat(msgs){
             <span class="pessoa destinatario">${msg.to}:</span>
             <span class="mensagem">${msg.text}</span>
         </div>`
-        }
-        //FALTA ADICIONAR CONDIÇÕES DENTRO DA MENSAGEM PRIVADA
-        else if (msg.type ==="private_message") {
+        }        
+        else if (msg.type === "private_message" && (objUser.name === msg.from || objUser.name === msg.to)) {
             elemento.innerHTML += `<div data-test="message" class="mbox reservado">
             <span class="horamsg">${msg.time}</span>
             <span class="pessoa remetente">${msg.from}</span>
@@ -103,6 +102,7 @@ function enviarMensagem(){
         text: `${mensagem}`,
         type: "message"
     };
+    document.querySelector('input').value = "";
     const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages',objMsg);
     requisicao.then(envioSuccess);
     requisicao.catch(envioFail);
@@ -118,3 +118,4 @@ function envioFail(requisicao){
     console.log(requisicao.response);
     window.location.reload();
 }
+
