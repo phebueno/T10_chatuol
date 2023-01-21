@@ -15,15 +15,17 @@ function loginSuccess(requisicao){
     console.log(objUser);
     //Checa usuário a cada 5 segundos
     setInterval(function () {
-    let verificacao = axios.post('https:/xx/mock-api.driven.com.br/api/v6/uol/status',objUser);
+    let verificacao = axios.post('https://mock-api.driven.com.br/api/v6/uol/status',objUser);
     verificacao.catch(desconectado);}
     , 5000);
     //Solicita ao servidor msgs a cada 3 segundos.
-    setInterval(function () {
-    let buscarMensagem = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
-    buscarMensagem.then(msgSucesso);
-    buscarMensagem.catch(msgFail);}
-    , 3000);    
+    setInterval(buscarMensagens, 3000);    
+}
+
+function buscarMensagens(){
+    let requisicao = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
+    requisicao.then(msgSucesso);
+    requisicao.catch(msgFail);
 }
 
 function loginFail(requisicao){
@@ -51,6 +53,12 @@ function desconectado(requisicao){
 //Objeto que deve ser enviado ao servidor
 let objUser = {};
 login();
+const enter = document.querySelector('input');
+    enter.addEventListener("keydown", function(e){
+        if (e.code === "Enter") {  //Funciona também se apertar enter
+            enviarMensagem();
+        }
+    });
 
 function atualizarChat(msgs){
     const elemento = document.querySelector('.mensagens');
@@ -88,5 +96,25 @@ function atualizarChat(msgs){
 }
 
 function enviarMensagem(){
-    
+    const mensagem = document.querySelector('input').value;
+    const objMsg = {
+        from: `${objUser.name}`,
+        to: "Todos",
+        text: `${mensagem}`,
+        type: "message"
+    };
+    const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages',objMsg);
+    requisicao.then(envioSuccess);
+    requisicao.catch(envioFail);
+}
+
+function envioSuccess(){
+    //Realiza uma única instância de busca de mensagens
+    buscarMensagens();
+}
+
+function envioFail(requisicao){
+    alert('Você foi desconectado e sua mensagem não foi entregue! A página irá atualizar automaticamente.');   
+    console.log(requisicao.response);
+    window.location.reload();
 }
