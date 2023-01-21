@@ -66,13 +66,13 @@ function atualizarChat(msgs){
     //Encontra todas as mensagens:
     msgs.forEach(msg => {
         if (msg.type ==="status") 
-            elemento.innerHTML += `<div class="mbox status">
+            elemento.innerHTML += `<div data-test="message" class="mbox status">
             <span class="horamsg">${msg.time}</span>
             <span class="pessoa remetente">${msg.from}</span>
             <span class="mensagem">${msg.text}</span>
         </div>`
         else if (msg.type ==="message") {
-            elemento.innerHTML += `<div class="mbox">
+            elemento.innerHTML += `<div data-test="message" class="mbox">
             <span class="horamsg">${msg.time}</span>
             <span class="pessoa remetente">${msg.from}</span>
             <span>para</span>
@@ -82,7 +82,7 @@ function atualizarChat(msgs){
         }
         //FALTA ADICIONAR CONDIÇÕES DENTRO DA MENSAGEM PRIVADA
         else if (msg.type ==="private_message") {
-            elemento.innerHTML += `<div class="mbox reservado">
+            elemento.innerHTML += `<div data-test="message" class="mbox reservado">
             <span class="horamsg">${msg.time}</span>
             <span class="pessoa remetente">${msg.from}</span>
             <span>reservadamente para</span>

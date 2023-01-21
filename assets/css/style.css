@@ -49,6 +49,18 @@ input::placeholder{
 input:focus{
     outline: none;
 }
+
+/*Retira todos estilos do botão*/  
+.textbox  {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
 main{
     width:375px;
     /*CORRIGIR LIMITE VERTICAL DA PÁGINA*/    
