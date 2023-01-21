@@ -30,6 +30,7 @@ footer ion-icon{
 header{
     top:0;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+    z-index: 3;
 }
 footer{    
     bottom:0;
@@ -60,7 +61,7 @@ input:focus{
 	cursor: pointer;
 	outline: inherit;
 }
-
+/*Conteúdo principal*/ 
 main{
     width:375px;
     /*CORRIGIR LIMITE VERTICAL DA PÁGINA*/    
@@ -90,7 +91,76 @@ main{
 .status{
     background-color: #DCDCDC;
 }
+/*Tabela paricipantes*/
+.fundo{
+    position:fixed;
+    top:0;
+    right:0;
+    width:100vw;
+    height:100vh;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 5;
+} 
+.escondido{
+    display:none;
+}
+.participantes{
+    position:fixed;
+    top:0;
+    right:0;
+    width:259px;
+    height:100vh;
+    background-color: #FFFFFF;
+    z-index:6;
+}
+.contatos div,.visibilidade div{  
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.contatos div{
+    height:84px;
+}
+.visibilidade div{
+    height:66px;
+}
 
+ion-icon[name="checkmark"]{
+    font-size: 20px;
+    color:#28BB25;
+    position: absolute;
+    top:5px;
+    right:20px;
+    display:none;
+
+}
+ion-icon[name="checkmark"].check{
+    display:block;
+
+}
+.participantes li{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    height:36px;
+    display:flex;
+    align-items: center;
+    padding: 0 25px;
+    position: relative; /**Para ancorar os checks*/
+}
+.participantes ion-icon{
+    font-size:25px;
+    padding-right: 10px;
+}
+
+/*Ajustes mobile*/ 
 @media only screen and (hover: none) and (pointer: coarse), (max-width:375px) { 
     body,header,footer,main{
         width:100%;

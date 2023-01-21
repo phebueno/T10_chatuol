@@ -119,3 +119,22 @@ function envioFail(requisicao){
     window.location.reload();
 }
 
+//Seção dos participantes
+function toggleParticipantes(){
+    const fundo = document.querySelector(".fundo");
+    const sidebar = document.querySelector(".participantes")
+    fundo.classList.toggle('escondido');
+    sidebar.classList.toggle('escondido');
+}
+
+//Seção dos participantes
+function selecionaParticipante(elemento){
+    document.querySelector(".contatos .check").classList.remove("check");
+    elemento.querySelector("ion-icon[name='checkmark']").classList.add("check");
+}
+
+function selecionaVisibilidade(elemento){
+    document.querySelector(".visibilidade .check").classList.remove("check");
+    elemento.querySelector("ion-icon[name='checkmark']").classList.add("check");
+}
+
