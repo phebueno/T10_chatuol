@@ -18,15 +18,16 @@ function loginSuccess(requisicao){
         document.querySelector('.login').classList.add('escondido'); }
     ,3000)
     console.log('Logado!');
-    console.log(objUser);    
+    console.log(objUser);   
     buscarParticipantes();
     //Checa usuário a cada 5 segundos
     setInterval(function () {
     let verificacao = axios.post('https://mock-api.driven.com.br/api/v6/uol/status',objUser);
     verificacao.catch(desconectado);}
-    , 5000);
-    //Solicita ao servidor msgs a cada 3 segundos.
-    setInterval(buscarMensagens, 3000);    
+    , 5000);    
+    //Solicita ao servidor msgs a cada 3 segundos; busca participantes a cada 10s.
+    setInterval(buscarMensagens, 3000);
+    setInterval(buscarParticipantes, 10000);    
 }
 
 function buscarMensagens(){
@@ -151,8 +152,16 @@ function selecionaVisibilidade(elemento){
 }
 
 function buscarParticipantes(){
+    console.log("Atualizou!");
     let requisicao = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants');
     const elemento = document.querySelector('.contatos ul');
+    //A cada 10s o elemento VAI resetar, e Todos estará checado como padrão novamente.
+    //no entanto, não vai mudar a pessoa selecionada na msg, então nao tem muito problema.
+    elemento.innerHTML = `<li data-test="all" onclick="selecionaParticipante(this);">
+                <ion-icon name="people"></ion-icon>
+                <p>Todos</p>
+                <ion-icon data-test="check" class="check" name="checkmark"></ion-icon>
+                </li>`
     //É necessário tratar erros de participantes?
     requisicao.then((participantesRecebidos) =>{
         const nomeParticipantes = participantesRecebidos.data;
