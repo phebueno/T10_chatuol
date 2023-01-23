@@ -104,7 +104,8 @@ main{
 .fundo{
     position:fixed;
     top:0;
-    right:0;
+    left:0;
+    bottom:0;
     width:100vw;
     height:100vh;
     background: rgba(0, 0, 0, 0.6);
@@ -178,8 +179,8 @@ ion-icon[name="checkmark"].check{
 /**Tela de Login*/
 
 .login{
-    width:100%;
-    height:100%;
+    width:100vw;
+    height:100vh;
     position:fixed;
     background-color: #FFFFFF;
     z-index:6;
@@ -209,6 +210,11 @@ ion-icon[name="checkmark"].check{
     border: 1px solid #D7D7D7;
     border-radius: 4px;
     margin: 20px 0;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    color: black;
+    text-align: center; 
 }
 #login-texto::placeholder{
     opacity:1;

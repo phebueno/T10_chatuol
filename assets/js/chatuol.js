@@ -89,7 +89,14 @@ function atualizarChat(msgs){
             <span class="mensagem">${msg.text}</span>
         </div>`
         }
-        elemento.lastChild.scrollIntoView();
+        /**Essa função vai apenas puxar pra última mensagem se o usuário estiver olhando pra ela.
+         * Sem isso, ficaria preso embaixo a cada 3s!
+         */
+        window.onscroll = function() {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                elemento.lastChild.scrollIntoView();   
+            }
+        };                   
     });    
 }
 
