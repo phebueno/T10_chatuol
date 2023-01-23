@@ -15,7 +15,7 @@
     <div>
     <header>
         <img src="assets/imgs/logo.png" alt="">
-        <button class="nostyle" onclick="toggleParticipantes()" ><ion-icon name="people" ></ion-icon></button></ion-icon>
+        <button data-test="open-participants" class="nostyle" onclick="toggleParticipantes()" ><ion-icon name="people" ></ion-icon></button></ion-icon>
     </header>
     <main>
         <section class="mensagens">
@@ -25,24 +25,24 @@
     <footer>
         <input id="texto" data-test="input-message" type="text" placeholder="Escreva aqui...">
         <button data-test="send-message" class="nostyle" onclick="enviarMensagem();"><ion-icon name="paper-plane-outline"></ion-icon></button>
-        <div class="paraDestinatario">Enviando para&nbsp;<p class="destino">Todos</p>&nbsp;<p class="reservadamente"></p></div>        
+        <div data-test="recipient" class="paraDestinatario">Enviando para&nbsp;<p class="destino">Todos</p>&nbsp;<p class="reservadamente"></p></div>        
     </footer>
 </div>
 <!--Tela participantes--> 
-<div class="fundo escondido" onclick="toggleParticipantes()">      
+<div data-test="overlay" class="fundo escondido" onclick="toggleParticipantes()">      
 </div>
 <aside class="participantes escondido">
     <section class="contatos">
         <div>Escolha um contato para enviar mensagem:</div>
         <ul>
-            <li onclick="selecionaParticipante(this);"><ion-icon name="people"></ion-icon><p>Todos</p><ion-icon class="check" name="checkmark"></ion-icon></li>
+            <li data-test="all" onclick="selecionaParticipante(this);"><ion-icon name="people"></ion-icon><p>Todos</p><ion-icon data-test="check" class="check" name="checkmark"></ion-icon></li>
         </ul>
     </section>
     <section class="visibilidade">
         <div>Escolha a visibilidade:</div>
         <ul>
-            <li onclick="selecionaVisibilidade(this);"><ion-icon name="lock-open"></ion-icon><p>Público</p><ion-icon class="check" name="checkmark"></ion-icon></li>
-            <li onclick="selecionaVisibilidade(this);"><ion-icon name="lock-closed"></ion-icon><p>Reservadamente</p><ion-icon name="checkmark"></ion-icon></li>
+            <li data-test="public" onclick="selecionaVisibilidade(this);"><ion-icon name="lock-open"></ion-icon><p>Público</p><ion-icon data-test="check" class="check" name="checkmark"></ion-icon></li>
+            <li data-test="private" onclick="selecionaVisibilidade(this);"><ion-icon name="lock-closed"></ion-icon><p>Reservadamente</p><ion-icon data-test="check" name="checkmark"></ion-icon></li>
         </ul>        
     </section>    
 </aside>

@@ -157,10 +157,10 @@ function buscarParticipantes(){
     requisicao.then((participantesRecebidos) =>{
         const nomeParticipantes = participantesRecebidos.data;
         nomeParticipantes.forEach(participante => {
-            elemento.innerHTML+=`<li onclick="selecionaParticipante(this);">
+            elemento.innerHTML+=`<li data-test="participant" onclick="selecionaParticipante(this);">
                                 <ion-icon name="person-circle"></ion-icon>
                                 <p>${participante.name}</p>
-                                <ion-icon name="checkmark"></ion-icon>
+                                <ion-icon data-test="check" name="checkmark"></ion-icon>
                                 </li>
                                 `;
         });
