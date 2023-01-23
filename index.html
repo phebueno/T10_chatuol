@@ -25,6 +25,7 @@
     <footer>
         <input id="texto" data-test="input-message" type="text" placeholder="Escreva aqui...">
         <button data-test="send-message" class="nostyle" onclick="enviarMensagem();"><ion-icon name="paper-plane-outline"></ion-icon></button>
+        <div class="paraDestinatario">Enviando para&nbsp;<p class="destino">Todos</p>&nbsp;<p class="reservadamente"></p></div>
         
     </footer>
 </div>
@@ -36,8 +37,6 @@
         <div>Escolha um contato para enviar mensagem:</div>
         <ul>
             <li onclick="selecionaParticipante(this);"><ion-icon name="people"></ion-icon><p>Todos</p><ion-icon class="check" name="checkmark"></ion-icon></li>
-            <li onclick="selecionaParticipante(this);"><ion-icon name="person-circle"></ion-icon><p>João</p><ion-icon name="checkmark"></ion-icon></li>
-            <li onclick="selecionaParticipante(this);"><ion-icon name="person-circle"></ion-icon><p>Maria</p><ion-icon name="checkmark"></ion-icon></li>
         </ul>
     </section>
     <section class="visibilidade">

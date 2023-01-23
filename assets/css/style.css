@@ -50,6 +50,15 @@ input::placeholder{
 input:focus{
     outline: none;
 }
+.paraDestinatario{
+    position:absolute;
+    bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: #505050;
+    display:flex;
+}
 
 /*Retira todos estilos do botão*/  
 .nostyle  {
@@ -108,10 +117,13 @@ main{
     position:fixed;
     top:0;
     right:0;
+    bottom:0;
     width:259px;
-    height:100vh;
     background-color: #FFFFFF;
     z-index:6;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    /**Overflow para scrollar caso haja participantes demais, caso contrário, estica para top 0 e bottom 0*/
 }
 .contatos div,.visibilidade div{  
     font-family: 'Roboto', sans-serif;

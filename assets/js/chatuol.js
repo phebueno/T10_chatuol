@@ -12,7 +12,8 @@ function login(){
 //Funções que ocorrem após login, periodicamente
 function loginSuccess(requisicao){
     console.log('Logado!');
-    console.log(objUser);
+    console.log(objUser);    
+    buscarParticipantes();
     //Checa usuário a cada 5 segundos
     setInterval(function () {
     let verificacao = axios.post('https://mock-api.driven.com.br/api/v6/uol/status',objUser);
@@ -96,11 +97,15 @@ function atualizarChat(msgs){
 
 function enviarMensagem(){
     const mensagem = document.querySelector('input').value;
+    const destinatario = document.querySelector('.paraDestinatario .destino').innerHTML;
+    let tipoMsg = document.querySelector('.paraDestinatario .reservadamente').innerHTML;
+    //Se tipoMsg estiver vazio, a mensagem é pública; se tiver algo, é privada
+    tipoMsg == "" ? tipoMsg="message" : tipoMsg="private_message";
     const objMsg = {
         from: `${objUser.name}`,
-        to: "Todos",
+        to: `${destinatario}`,
         text: `${mensagem}`,
-        type: "message"
+        type: `${tipoMsg}`
     };
     document.querySelector('input').value = "";
     const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages',objMsg);
@@ -131,10 +136,37 @@ function toggleParticipantes(){
 function selecionaParticipante(elemento){
     document.querySelector(".contatos .check").classList.remove("check");
     elemento.querySelector("ion-icon[name='checkmark']").classList.add("check");
+    const destino = document.querySelector('.paraDestinatario .destino');
+    destino.innerHTML = elemento.querySelector('p').innerHTML;
 }
 
 function selecionaVisibilidade(elemento){
     document.querySelector(".visibilidade .check").classList.remove("check");
     elemento.querySelector("ion-icon[name='checkmark']").classList.add("check");
+    const msgTipo = elemento.querySelector('p').innerHTML;
+    const reservadamente = document.querySelector('.paraDestinatario .reservadamente');
+    if(msgTipo === 'Público'){
+        reservadamente.innerHTML = "";
+    }
+    else{
+        reservadamente.innerHTML = "(reservadamente)";
+    }
+}
+
+function buscarParticipantes(){
+    let requisicao = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants');
+    const elemento = document.querySelector('.contatos ul');
+    //É necessário tratar erros de participantes?
+    requisicao.then((participantesRecebidos) =>{
+        const nomeParticipantes = participantesRecebidos.data;
+        nomeParticipantes.forEach(participante => {
+            elemento.innerHTML+=`<li onclick="selecionaParticipante(this);">
+                                <ion-icon name="person-circle"></ion-icon>
+                                <p>${participante.name}</p>
+                                <ion-icon name="checkmark"></ion-icon>
+                                </li>
+                                `;
+        });
+    });
 }
 
