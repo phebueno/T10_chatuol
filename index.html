@@ -25,11 +25,10 @@
     <footer>
         <input id="texto" data-test="input-message" type="text" placeholder="Escreva aqui...">
         <button data-test="send-message" class="nostyle" onclick="enviarMensagem();"><ion-icon name="paper-plane-outline"></ion-icon></button>
-        <div class="paraDestinatario">Enviando para&nbsp;<p class="destino">Todos</p>&nbsp;<p class="reservadamente"></p></div>
-        
+        <div class="paraDestinatario">Enviando para&nbsp;<p class="destino">Todos</p>&nbsp;<p class="reservadamente"></p></div>        
     </footer>
 </div>
-
+<!--Tela participantes--> 
 <div class="fundo escondido" onclick="toggleParticipantes()">      
 </div>
 <aside class="participantes escondido">
@@ -45,8 +44,22 @@
             <li onclick="selecionaVisibilidade(this);"><ion-icon name="lock-open"></ion-icon><p>Público</p><ion-icon class="check" name="checkmark"></ion-icon></li>
             <li onclick="selecionaVisibilidade(this);"><ion-icon name="lock-closed"></ion-icon><p>Reservadamente</p><ion-icon name="checkmark"></ion-icon></li>
         </ul>        
-    </section>
+    </section>    
 </aside>
+<!--Tela login-->
+    <section class="login">
+        <img class="logo2" src="assets/imgs/logo2.png" alt="">
+        <div class="login-conteudo">            
+            <input class="login-texto" id="login-texto" type="text" placeholder="Digite o seu nome">
+            <button class="botao-login" onclick="login();">
+                <span class="botao-texto">Entrar</span>
+            </button>
+        </div>        
+        <div class="login-carregando escondido">
+            <img class="loading" src="assets/imgs/loading.gif" alt="">
+            <p>Entrando...</p>
+        </div>        
+    </section>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

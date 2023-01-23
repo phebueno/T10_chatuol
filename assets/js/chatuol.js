@@ -1,9 +1,12 @@
 //Função que pega o nome do usuário
 function login(){     
-    const nome = prompt("Insira seu nome para o login:");
+    const nome = document.querySelector('.login-texto').value;
+    document.querySelector('.login-conteudo').classList.add('escondido');
+    document.querySelector('.login-carregando').classList.remove('escondido');
+    console.log(nome);
     objUser={
         name:nome
-    }; 
+    };
     //Envia ao server
     const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants',objUser);
     requisicao.then(loginSuccess);
@@ -11,6 +14,9 @@ function login(){
 }
 //Funções que ocorrem após login, periodicamente
 function loginSuccess(requisicao){
+    setTimeout(function () {
+        document.querySelector('.login').classList.add('escondido'); }
+    ,3000)
     console.log('Logado!');
     console.log(objUser);    
     buscarParticipantes();
@@ -30,9 +36,10 @@ function buscarMensagens(){
 }
 
 function loginFail(requisicao){
-    alert('Este nome não está disponível, por favor, tente novamente.');    
+    alert('Este nome não está disponível, por favor, tente novamente.');
+    document.querySelector('.login-conteudo').classList.remove('escondido');
+    document.querySelector('.login-carregando').classList.add('escondido');    
     console.log(requisicao.response);
-    login(); //recursividade no login!
 }
 //Retornam as mensagens, periodicamente
 
@@ -51,16 +58,6 @@ function desconectado(requisicao){
     console.log(requisicao.response);
     window.location.reload();
 }
-//Objeto que deve ser enviado ao servidor
-let objUser = {};
-login();
-const enter = document.querySelector('input');
-    enter.addEventListener("keydown", function(e){
-        if (e.code === "Enter") {  //Funciona também se apertar enter
-            enviarMensagem();
-        }
-    });
-
 function atualizarChat(msgs){
     const elemento = document.querySelector('.mensagens');
     elemento.innerHTML = "";
@@ -96,7 +93,7 @@ function atualizarChat(msgs){
 }
 
 function enviarMensagem(){
-    const mensagem = document.querySelector('input').value;
+    const mensagem = document.querySelector('#texto').value;
     const destinatario = document.querySelector('.paraDestinatario .destino').innerHTML;
     let tipoMsg = document.querySelector('.paraDestinatario .reservadamente').innerHTML;
     //Se tipoMsg estiver vazio, a mensagem é pública; se tiver algo, é privada
@@ -170,3 +167,11 @@ function buscarParticipantes(){
     });
 }
 
+//Objeto que deve ser enviado ao servidor
+let objUser = {};
+const enter = document.querySelector('input');
+    enter.addEventListener("keydown", function(e){
+        if (e.code === "Enter") {  //Funciona também se apertar enter
+            enviarMensagem();
+        }
+    });

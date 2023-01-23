@@ -36,13 +36,13 @@ footer{
     bottom:0;
     box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
 }
-input{
+#texto{
     border:none;
     font-weight: 400;
     font-size: 18px;
     line-height: 21px;
 }
-input::placeholder{
+#texto::placeholder{
     opacity:1;
     color: black;    
     font-style: italic;
@@ -109,9 +109,12 @@ main{
     height:100vh;
     background: rgba(0, 0, 0, 0.6);
     z-index: 5;
-} 
+}
+/**A classe escondido possui também visibility pois não altera a propriedade display já existente, 
+    o que poderia causar conflito.*/ 
 .escondido{
     display:none;
+    visibility: hidden;
 }
 .participantes{
     position:fixed;
@@ -172,9 +175,79 @@ ion-icon[name="checkmark"].check{
     padding-right: 10px;
 }
 
+/**Tela de Login*/
+
+.login{
+    width:100%;
+    height:100%;
+    position:fixed;
+    background-color: #FFFFFF;;
+    z-index:6;
+    top:0;
+    left:0;
+    bottom:0;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.login-conteudo,.login-carregando{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login .logo2{
+    width: 130px;
+    height: 92px;
+    margin: 72px 0;
+}
+
+#login-texto{
+    width: 261px;
+    height: 54px;
+    background: #FFFFFF;
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;
+    margin: 20px 0;
+}
+#login-texto::placeholder{
+    opacity:1;
+    color: #AEAEAE;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: center;    
+}
+.botao-login{
+    width: 109px;
+    height: 45px;
+    border-radius: 9px;
+    background-color: #E7E7E7;
+    border:none;
+}
+.botao-texto{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    color: #696969;
+}
+.login-carregando{
+    position:fixed;
+    top: 250px;
+}
+.loading{
+    max-width: 100px;
+    max-height: 100px;
+    margin:20px;
+}
+.login-carregando p{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 20px;    
+}
 /*Ajustes mobile*/ 
 @media only screen and (hover: none) and (pointer: coarse), (max-width:375px) { 
-    body,header,footer,main{
+    body,header,footer,main,.login{
         width:100%;
         min-width:375px;
     }
