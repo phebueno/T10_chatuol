@@ -88,16 +88,27 @@ function atualizarChat(msgs){
             <span></span>
             <span class="mensagem">${msg.text}</span>
         </div>`
-        }
-        /**Essa função vai apenas puxar pra última mensagem se o usuário estiver olhando pra ela.
+        }                  
+    });
+    //O timer garante que o navegador não ficará preso na último objeto    
+    const idIntervalScrollDown = setInterval(elemento.lastChild.scrollIntoView.bind(elemento.lastChild), 1000);
+     /**Essa função vai apenas puxar pra última mensagem se o usuário estiver olhando pra ela.
          * Sem isso, ficaria preso embaixo a cada 3s!
          */
-        window.onscroll = function() {
-            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-                elemento.lastChild.scrollIntoView();   
-            }
-        };                   
-    });    
+    elemento.innerHTML+=`<div></div>`;
+     window.onscroll = function() {
+        if (((window.innerHeight + window.scrollY) >= document.body.offsetHeight)) {
+            idIntervalScrollDown;
+        }
+        else{
+            clearInterval(idIntervalScrollDown);
+        }        
+    }
+    //Se for a primeira vez, joga pro fim do chat
+    if(previous==false){        
+        elemento.lastChild.scrollIntoView();
+        previous=true;
+    }    
 }
 
 function enviarMensagem(){
@@ -185,6 +196,8 @@ function buscarParticipantes(){
 
 //Objeto que deve ser enviado ao servidor
 let objUser = {};
+//Objeto para checar se é a primeira atualização de msg
+let previous = false;
 const enter = document.querySelector('input');
     enter.addEventListener("keydown", function(e){
         if (e.code === "Enter") {  //Funciona também se apertar enter
